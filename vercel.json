@@ -1,0 +1,1 @@
+{"version":2,"routes":[{"src":"/player","dest":"/api/player.js"}]}
