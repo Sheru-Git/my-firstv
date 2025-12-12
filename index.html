@@ -1,1 +1,29 @@
-<!DOCTYPE html><html><body><h2>Player Working</h2><p>Add ?url=YOUR_VIDEO</p></body></html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>M3U8 Player</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+  <h2>HLS M3U8 Player</h2>
+  <video id="video" controls autoplay width="100%" height="auto"></video>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const videoUrl = urlParams.get("url");
+
+    if (!videoUrl) {
+      document.body.innerHTML += "<p>Add ?url=YOUR_M3U8_LINK</p>";
+    } else {
+      const video = document.getElementById("video");
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(videoUrl);
+        hls.attachMedia(video);
+      } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+        video.src = videoUrl;
+      }
+    }
+  </script>
+</body>
+</html>
